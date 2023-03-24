@@ -1,0 +1,143 @@
+
+<h2>Validaciones reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form [formGroup]="miFormulario"
+              autocomplete="off"
+              (ngSubmit)="submitFormulario()">
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="nombre"
+                           placeholder="Nombre de usuario">
+                    <span class="form-text text-danger"
+                          *ngIf="campoNoValido('nombre')">
+                        De ser en formato nombre y apellido.
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">E-mail</label>
+
+                <div class="col-sm-9">
+                    <input type="email"
+                           class="form-control"
+                           formControlName="email"
+                           placeholder="E-mail del usuario">
+                    <span class="form-text text-danger"
+                          *ngIf="campoNoValido('email')">
+                        {{ emailErrorMsg }}
+                    </span>
+                    <!--
+                   <span class="form-text text-danger"
+                          *ngIf="emailRequired()">
+                        El campo 'e-mail' es obligatorio.
+                    </span>
+                    <span class="form-text text-danger"
+                          *ngIf="emailFormato()">
+                        El formato de 'e-mail' no cumple los requisitos.
+                    </span>
+                    <span class="form-text text-danger"
+                          *ngIf="emailTomado()">
+                        El 'e-mail' introducido ya corresponde a otro usuario.
+                    </span>
+                    -->
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Usuario</label>
+
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="usuario"
+                           placeholder="Nombre código de usuario">
+                    <span class="form-text text-danger"
+                          *ngIf="campoNoValido('usuario')">
+                        El usuario no puede ser 'strider'.
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contraseña</label>
+
+                <div class="col-sm-9">
+                    <input type="password"
+                           autocomplete="off"
+                           class="form-control"
+                           formControlName="contraseña"
+                           placeholder="Contraseña">
+                    <span class="form-text text-danger"
+                          *ngIf="campoNoValido('contraseña')">
+                        La contraseña debe contener al menos 6 caracteres.
+                     </span>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar</label>
+
+                <div class="col-sm-9">
+                    <input type="password"
+                           autocomplete="off"
+                           class="form-control"
+                           formControlName="contraseña2"
+                           placeholder="Confirmar contraseña">
+                    <span class="form-text text-danger"
+                          *ngIf="campoNoValido('contraseña2')">
+                        Las contraseñas no coinciden.
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            [disabled]="miFormulario.pending"
+                            type="submit">
+                        Crear
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<h2>Form valid: {{ miFormulario.valid }}</h2>
+
+<h2>Form status: {{ miFormulario.status }}</h2>
+
+<h2>Form pending: {{ miFormulario.pending }}</h2>
+
+<h2>Form errors:</h2>
+<pre>{{ miFormulario.errors | json }}</pre>
+
+<h5>Nombre</h5>
+<pre>{{ miFormulario.controls["nombre"]?.errors | json }}</pre>
+
+<h5>Email</h5>
+<pre>{{ miFormulario.controls["email"]?.errors | json }}</pre>
+
+<h5>Usuario</h5>
+<pre>{{ miFormulario.controls["usuario"]?.errors | json }}</pre>
+
+<h5>Contraseña</h5>
+<pre>{{ miFormulario.controls["contraseña"]?.errors | json }}</pre>
+
+<h5>Confirmar contraseña</h5>
+<pre>{{ miFormulario.controls["contraseña2"]?.errors | json }}</pre>
